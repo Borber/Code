@@ -1,0 +1,7 @@
+#!/bin/zsh
+i=1
+while [ $i -lt 11 ]
+do
+echo $i
+i=$[$i+1]
+done
