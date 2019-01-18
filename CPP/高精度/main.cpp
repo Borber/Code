@@ -10,7 +10,8 @@ class High_int{
     SUM.Count = max(this->Count,Other.Count);
     for(int i = 0;i < SUM.Count;++i){
     SUM.Num[i] = this->Num[i] + Other.Num[i];
-    if(SUM.Num[i]>= SUM.bsm) SUM.Num[i+1]++;SUM.Num[i]%=SUM.bsm;
+    SUM.Num[i+1]+=SUM.Num[i]/SUM.bsm;
+    SUM.Num[i]%=SUM.bsm;
     }
     if(SUM.Num[SUM.Count]) SUM.Count++;
     return SUM;
@@ -24,14 +25,14 @@ void High_int::Input(){
     string Num_Str;
     cin >> Num_Str;
     unsigned int Length = Num_Str.length();
-    for(int i = Length-1,temp = 0;i>=0;i-=bs,temp = 0){
-        for(int j = max(0,i-bs+1);j<=i;j++) temp += temp*10+Num_Str[j]-'0';
+    for(int i = Length-1;i>=0;i-=bs){
+        int temp = 0;
+        for(int j = max(0,i-bs+1);j <= i;++j) temp = temp*10+Num_Str[j]-'0';
         Num[Count++] = temp;
         }
 }
-
 void High_int::Output(){
-    for(int i = Count;i >= 0;--i) cout << Num[i];
+    for(int i = Count-1;i >= 0;--i) cout << Num[i];
     cout << endl;
 }
 int main(){
