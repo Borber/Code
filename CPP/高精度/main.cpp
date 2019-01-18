@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-class Math{
+class Math_Plus{
     public:
     void Input();
     void Chose();
@@ -11,7 +11,7 @@ class Math{
     int *Num0_Printer = Num0,*Num1_Printer = Num1;
     int Num0_Length = 0,Num1_Length = 0,Num_Length;
 };
-void Math::Input(){
+void Math_Plus::Input(){
     char Num_Char;
     cout << "Please input the number A" << endl;
     while(scanf("%c",&Num_Char)&&Num_Char>='0'&&Num_Char<='9') Num0[Num0_Length++] = Num_Char - '0';
@@ -27,7 +27,7 @@ void Math::Input(){
     }
 }
 
-void Math::Chose(){
+void Math_Plus::Chose(){
     if(Num0_Length < Num1_Length){
         int *temp = Num0_Printer;
         Num0_Printer = Num1_Printer;
@@ -36,7 +36,7 @@ void Math::Chose(){
     }
     else Num_Length = Num0_Length;
 }
-void Math::Plus(){
+void Math_Plus::Plus(){
     for(int i = 0;i < Num_Length;++i){
         Num0_Printer[i]+=Num1_Printer[i];
         Num0_Printer[i+1]+=Num0_Printer[i]/10;
@@ -44,13 +44,13 @@ void Math::Plus(){
     }
     if(Num0_Printer[Num_Length]) ++Num_Length;
 }
-void Math::Output(){
+void Math_Plus::Output(){
     cout << "A+B=" << endl;
     for(int i = Num_Length-1;i >= 0;--i)  cout << Num0[i];
     cout << endl;
 }
 int main(){
-    Math Plus_High_Precision;
+    Math_Plus Plus_High_Precision;
     Plus_High_Precision.Input();
     Plus_High_Precision.Chose();
     Plus_High_Precision.Plus();
