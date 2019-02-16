@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-import com.sun.xml.internal.ws.api.pipe.Tube;
+//import com.sun.xml.internal.ws.api.pipe.Tube;
 public class BallGame extends JFrame{
     private static final long serialVersionUID = 1L;
     Image ball = Toolkit.getDefaultToolkit().getImage("images/ball.png");
@@ -10,7 +10,7 @@ public class BallGame extends JFrame{
     double x = 100,y = 100;
     double degree = 3.14/3;
     public void paint(Graphics g){
-        System.out.println("窗口被画了一次");
+        System.out.println("1");
         g.drawImage(desk,0,0,null);
         g.drawImage(ball,(int)x,(int)y,null);
         x = x + 5*Math.cos(degree);
