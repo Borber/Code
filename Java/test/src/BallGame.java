@@ -36,6 +36,7 @@ public class BallGame extends JFrame{
         System.out.println("Hello World");
         BallGame game = new BallGame();
         game.launchFrame();
+
     }
 }
 
