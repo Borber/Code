@@ -1,7 +1,9 @@
 import java.util.Scanner;
-//import com.borber.*;
+import com.borber.*;
 public class test{
     Scanner X = new Scanner(System.in);
+    Compare C = new Compare();
+    Clear L = new Clear();
     boolean Game_Over = true;
     //TODO: int Wrong_TimeS = 0;
     String[] N_Keys = new String[]{
@@ -19,9 +21,8 @@ public class test{
     };
     String Key;
     String M_Key="Zilan";
-    int U_Key_N;
     char U_Key[];
-    public void Start(){
+    public void Show_Menu(){
         Chang_Key();
         do{
         System.out.println("  Guess Word Game");
@@ -65,51 +66,30 @@ public class test{
         else
         System.out.println("I'm so sorry.It's not you.");
     }
-    public void Chang_Key(){
-        int N = (int)(Math.random()*10)%N_Keys.length;
-        Key = N_Keys[N];
-        U_Key_N = 0;
-        U_Key = new char[Key.length()];
-    }
+    
     public void Game_Play(){
         char input;
-        boolean Fleg,EXIST;
+        boolean Fleg;
         do{
             Fleg = false;
             System.out.println("Enter your guess: ");
             input = X.next().charAt(0);
             for(int i = 0;i < Key.length();++i){
-            if(Key.toUpperCase().charAt(i) == input || Key.toLowerCase().charAt(i) == input){
-            boolean Copy = false;
-            for(int j=0;j<U_Key_N;++j)
-            if (input == U_Key[j]||input == U_Key[j] + 'A' -'a') Copy = true;
+            if(C.Char_Ign(Key.charAt(i),input)){
             Fleg = true;
-            if(!Copy) U_Key[U_Key_N++] = Key.charAt(i);
+            U_Key[i] = Key.charAt(i);
+            //TODO: 改变储存方法
             }
         }
         if (Fleg) System.out.println("It's in");
         else System.out.println("It's not in");
         Fleg = false;
-        for(int i=0;i < Key.length();++i){
-            EXIST = false;
-            for(int j=0;j<U_Key_N;++j)
-            if(Key.charAt(i) == U_Key[j]) EXIST = true;
-            if(EXIST) System.out.print(Key.charAt(i));
-            else System.out.print("*");
-        }
-        System.out.println();
+        System.out.println(U_Key);
         Game_Over_Check();
     }while(Game_Over);
     }
     public void Game_Over_Check(){
-        int Length = 0;
-        for(int i = 0;i < Key.length();++i)
-        for(int j = 0;j < U_Key_N;++j)
-        if(Key.charAt(i) == U_Key[j]){
-            Length++;
-            break;
-        }
-        if(Length == Key.length()){
+        if(C.Str_Char(Key, U_Key)){
             System.out.println(Key);
             System.out.println("Winner winner! chicken dinner!");
             Game_Over = false;
@@ -119,8 +99,6 @@ public class test{
             char Check = X.next().charAt(0);
             if(Check == 'Y'||Check == 'y'){
                 Chang_Key();
-                U_Key = new char[Key.length()];
-                U_Key_N = 0;
                 Game_Over = true;
             }
         }
@@ -129,8 +107,14 @@ public class test{
         for(int i=0;i<=NUM;++i)
         System.out.print(S);
     }
+    public void Chang_Key(){
+        int N = (int)(Math.random()*10)%N_Keys.length;
+        Key = N_Keys[N];
+        U_Key = new char[Key.length()];
+        L.clear_Char(U_Key, '*');
+    }
     public static void main(String[] args) {
         test Game = new test();
-        Game.Start();
+        Game.Show_Menu();
         }
         }
