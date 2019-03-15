@@ -4,8 +4,9 @@ public class test{
     Scanner X = new Scanner(System.in);
     Compare C = new Compare();
     Clear L = new Clear();
+    Print B = new Print();
     boolean Game_Over = true;
-    //TODO: int Wrong_TimeS = 0;
+    int Wrong_Time = 0;
     String[] N_Keys = new String[]{
         "China",
         "BORBER",
@@ -26,9 +27,9 @@ public class test{
         Chang_Key();
         do{
         System.out.println("  Guess Word Game");
-        Print_Line(5, '-');
+        B.Print_Line(5, '-');
         System.out.print("Menu");
-        Print_Line(5, '-');
+        B.Print_Line(5, '-');
         System.out.println();
         System.out.println("1. Play");
         System.out.println("2. Instructions");
@@ -58,6 +59,7 @@ public class test{
             System.out.println("1 or 2 oor 3 ooor 4 ,no fucking others");
         }
     }
+    
     public void Wife(){
         X.nextLine();
         System.out.println("Input the Secret-Key");
@@ -73,16 +75,29 @@ public class test{
         do{
             Fleg = false;
             System.out.println("Enter your guess: ");
+            Wrong_Time++;
             input = X.next().charAt(0);
             for(int i = 0;i < Key.length();++i){
             if(C.Char_Ign(Key.charAt(i),input)){
             Fleg = true;
             U_Key[i] = Key.charAt(i);
-            //TODO: 改变储存方法
             }
         }
         if (Fleg) System.out.println("It's in");
-        else System.out.println("It's not in");
+        else {
+            System.out.println("It's not in");
+            switch(Wrong_Time/5){
+                case 1 :
+                System.out.println("Come on!");
+                break;
+                case 2 :
+                System.out.println("You can do this!");
+                break;
+                case 3 :
+                System.out.println("I think this game is not for you.");
+            }
+        
+        }
         Fleg = false;
         System.out.println(U_Key);
         Game_Over_Check();
@@ -103,15 +118,12 @@ public class test{
             }
         }
     }
-    public void Print_Line(int NUM,char S){
-        for(int i=0;i<=NUM;++i)
-        System.out.print(S);
-    }
     public void Chang_Key(){
         int N = (int)(Math.random()*10)%N_Keys.length;
         Key = N_Keys[N];
         U_Key = new char[Key.length()];
-        L.clear_Char(U_Key, '*');
+        U_Key = L.clear_Char(U_Key, '*');
+        Wrong_Time = 0;
     }
     public static void main(String[] args) {
         test Game = new test();
